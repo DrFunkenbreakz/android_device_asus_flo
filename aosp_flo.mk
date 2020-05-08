@@ -17,12 +17,18 @@
 # Sample: This is where we'd set a backup provider if we had one
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 
-# AEX stuff.
+# Evolution X stuff.
+CUSTOM_BUILD_TYPE := UNOFFICIAL
 TARGET_BOOT_ANIMATION_RES := 1080
+#Pixel Gapps dont play nice on non arm64.
+#Pixel gapps removed from vendor. Open gapps included instead.
+TARGET_GAPPS_ARCH := arm
+#Not alot of space in system partition on the Flo. Nano Gapps.
+GAPPS_VARIANT := nano
+GAPPS_PRODUCT_PACKAGES += LatinImeGoogle
 
-# Inherit some common AEX stuff.
-$(call inherit-product, vendor/aosp/config/common.mk)
-$(call inherit-product, vendor/aosp/config/aex_props.mk)
+# Inherit some common stuff. This is a wifi only tablet
+$(call inherit-product, vendor/aosp/config/common_full_tablet_wifionly.mk)
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
@@ -30,7 +36,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/asus/flo/device.mk)
 $(call inherit-product-if-exists, vendor/asus/flo/flo-vendor.mk)
-#$(call inherit-product-if-exists, vendor/qcom/proprietary/common/config/device-vendor.mk)
 
 PRODUCT_DEVICE := flo
 PRODUCT_NAME := aosp_flo
