@@ -34,3 +34,6 @@ PRODUCT_ENFORCE_RRO_TARGETS := \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.flo:$(TARGET_COPY_OUT_RAMDISK)/fstab.flo \
     $(LOCAL_PATH)/rootdir/etc/fstab.flo:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.flo
+
+# Include Opengapps
+$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
